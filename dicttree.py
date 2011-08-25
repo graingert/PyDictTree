@@ -22,6 +22,7 @@
 
 
 from collections import defaultdict
+import simplejson as json
 
 class Element():
 	def __init__(self,obj=None):
@@ -39,3 +40,12 @@ class Element():
 			self.children[iterable[0]].add(iterable[1:],obj)
 		else:
 			self.obj = obj
+
+class ElementEncoder(json.JSONEncoder):
+	def default(self,obj):
+		if isinstance(obj,Element):
+			if (obj.children):
+				return obj.children
+			else:
+				return obj.obj
+		return json.JSONEncoder.default(self,obj)
