@@ -27,8 +27,8 @@ class Element():
 		else:
 			return self
 			
-	def add(self,obj=None,iterable=()):
+	def add(self,iterable=(),obj=None):
 		if len(iterable) > 0:
-			self.children[iterable[0]].add(obj,iterable[1:])
+			self.children[iterable[0]].add(iterable[1:],obj)
 		else:
 			self.obj = obj
